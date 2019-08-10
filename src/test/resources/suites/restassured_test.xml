@@ -4,7 +4,7 @@
 
     <test name="RestAssured Demo">
         <classes>
-            <class name="test.java.restassured.tests.GetRequestDemo" />
+            <class name="restassured.tests.GetRequestDemo" />
         </classes>
     </test>
 </suite>

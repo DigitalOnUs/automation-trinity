@@ -1,9 +1,9 @@
-package test.java.appium.tests;
+package appium.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import test.java.appium.common.BaseTest;
-import test.java.appium.pages.SampleCI_Page;
+import appium.common.BaseTest;
+import appium.pages.SampleCI_Page;
 
 public class SampleCITests extends BaseTest {
 

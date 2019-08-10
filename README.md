@@ -14,7 +14,7 @@ NOTE: A separate document guide will be created in this same repository for Appi
 
 ### To execute this project:
 ##### Mobile (Android )
-> mvn clean test -Dsurefire.suiteXmlFiles=src/testSuites/appium_test.xml
+> mvn clean test -Dxml.suite=appium_test.xml
 
 Within appium_test.xml, one can find all desired capabilities to setup the device.
 
@@ -28,7 +28,7 @@ There is a basic Android application at: `src/apps/app-debug.apk`
 
 
 ##### RestAssured
-> mvn clean test -Dsurefire.suiteXmlFiles=src/testSuites/restassured_test.xml
+> mvn clean test -Dxml.suite=restassured_test.xml
 
 This project is quite straightforward, and validates some responses from `https://jsonplaceholder.typicode.com`
 

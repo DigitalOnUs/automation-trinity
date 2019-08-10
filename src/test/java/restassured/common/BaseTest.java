@@ -1,4 +1,4 @@
-package test.java.restassured.common;
+package restassured.common;
 
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeClass;
