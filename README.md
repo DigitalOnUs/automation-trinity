@@ -23,8 +23,7 @@ This project runs on emulator (deviceName) called: `Nexus_5X_API_22`
 There is a basic Android application at: `src/test/resources/apps/app-debug.apk`
 
 
-#####NOTE: Emulator needs to be running prior executing this project.
-#####NOTE: `No` Appium server needs to be running, as project will open one by itself 
+**NOTE:** Emulator needs to be running prior executing this project. No Appium server needs to be running, as project will open one by itself .
 
 
 ##### RestAssured
@@ -32,4 +31,4 @@ There is a basic Android application at: `src/test/resources/apps/app-debug.apk`
 
 This project is quite straightforward, and validates some responses from `https://jsonplaceholder.typicode.com`
 
-#####NOTE: Internet connection is required to execute this project.
+**NOTE:** Internet connection is required to execute this project.
