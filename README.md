@@ -20,7 +20,7 @@ Within appium_test.xml, one can find all desired capabilities to setup the devic
 
 This project runs on emulator (deviceName) called: `Nexus_5X_API_22`
 
-There is a basic Android application at: `src/apps/app-debug.apk`
+There is a basic Android application at: `src/test/resources/apps/app-debug.apk`
 
 
 #####NOTE: Emulator needs to be running prior executing this project.
