@@ -16,12 +16,13 @@ public class AppiumServer {
 
 	private AppiumDriverLocalService service;
 
-	public boolean createAppiumServer(Map<String, Object> aMap) {
-		int port = (int) aMap.get("port");
-		String serverIP = (String) aMap.get("serverIP");
-		DesiredCapabilities dc = (DesiredCapabilities) aMap.get("serverCapabilities");
+	public boolean createAppiumServer(Map<String, Object> props) {
 
-		// if( !checkIfServerIsRunnning( port ) ) {
+		int port = (int) props.get("port");
+		String serverIP = (String) props.get("serverIP");
+		DesiredCapabilities dc = (DesiredCapabilities) props.get("serverCapabilities");
+
+		// if (!checkIfServerIsRunnning(port)) {
 		stopServer();
 		return startServer(port, serverIP, dc);
 		// } else {
@@ -34,29 +35,28 @@ public class AppiumServer {
 		stopServer();
 	}
 
-	// ------ PRIVATE------
-	private boolean checkIfServerIsRunnning(int port) {
-		boolean isServerRunning = false;
-		ServerSocket serverSocket;
-		try {
-			serverSocket = new ServerSocket(port);
-			serverSocket.close();
-		} catch (IOException e) {
-			// If control comes here, then it means that the port is in use
-			isServerRunning = true;
-		} finally {
-			serverSocket = null;
-		}
-		return isServerRunning;
-	}
+//	private boolean checkIfServerIsRunnning(int port) {
+//		boolean isServerRunning = false;
+//		ServerSocket serverSocket;
+//		try {
+//			serverSocket = new ServerSocket(port);
+//			serverSocket.close();
+//		} catch (IOException e) {
+//			// If control comes here, then it means that the port is in use
+//			isServerRunning = true;
+//		} finally {
+//			serverSocket = null;
+//		}
+//		return isServerRunning;
+//	}
 
-	private boolean startServer(int port, String anURL, DesiredCapabilities dc) {
+	private boolean startServer(int port, String serverIp, DesiredCapabilities dc) {
 		try {
 			AppiumServiceBuilder builder;
 
 			// Build the Appium service
 			builder = new AppiumServiceBuilder();
-			builder.withIPAddress("127.0.0.1");
+			builder.withIPAddress(serverIp);
 			builder.usingPort(port);
 			builder.withCapabilities(dc);
 			builder.withArgument(AndroidServerFlag.BOOTSTRAP_PORT_NUMBER, nextFreePort().toString());
@@ -83,15 +83,16 @@ public class AppiumServer {
 	}
 
 	private void stopServer() {
-		if (service != null)
+		if (service != null) {
 			service.stop();
+		}
 	}
 
 	private synchronized Integer nextFreePort() {
 		Integer port = (int) (Math.random() * 8000) + 8100;
 		while (true) {
 			try (ServerSocket endpoint = new ServerSocket(port)) {
-				System.out.println("Sock listening on Port :" + port);
+				System.out.println("Socket listening on port: " + port);
 				return port;
 			} catch (IOException e) {
 				port = ThreadLocalRandom.current().nextInt();

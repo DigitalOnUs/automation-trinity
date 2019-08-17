@@ -10,15 +10,18 @@ import org.testng.annotations.BeforeClass;
 import java.net.MalformedURLException;
 
 public class BaseTest {
-
-	public AppiumDriver driver;
+	
 	public final static Logger logger = Logger.getLogger(BaseTest.class);
-	private AppiumDriverFactory driverCreator = new AppiumDriverFactory();
+	
+	private AppiumDriverFactory driverFactory = new AppiumDriverFactory();
+
+	@SuppressWarnings("rawtypes")
+	public AppiumDriver driver;
 
 	@BeforeClass(alwaysRun = true)
 	public void setupDriver(ITestContext context) {
 		try {
-			driver = driverCreator.createDriver(context);
+			driver = driverFactory.createDriver(context);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -29,6 +32,6 @@ public class BaseTest {
 		if (driver != null) {
 			driver.quit();
 		}
-		driverCreator.closeServer();
+		driverFactory.closeServer();
 	}
 }

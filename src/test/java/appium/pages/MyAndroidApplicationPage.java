@@ -8,11 +8,7 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 
 @SuppressWarnings("rawtypes")
-public class SampleCI_Page extends BasePage {
-	
-	private AppiumDriver driver;
-
-	// ------- ELEMENTS -------
+public class MyAndroidApplicationPage extends BasePage {
 
 	@AndroidFindBy(id = "com.vitacost.myapplication:id/top-left-button")
 	@iOSXCUITFindBy(accessibility = "top-left-button")
@@ -31,7 +27,7 @@ public class SampleCI_Page extends BasePage {
 	private MobileElement bottomRight_btn;
 
 	// ------- METHODS -------
-	public SampleCI_Page(AppiumDriver driver) {
+	public MyAndroidApplicationPage(AppiumDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 	}

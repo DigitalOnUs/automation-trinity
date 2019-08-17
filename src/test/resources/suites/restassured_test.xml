@@ -1,8 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="restAssured_Test" verbose="1">
+<suite name="API Test Suite" verbose="1">
 
-    <test name="RestAssured Demo">
+    <test name="RestAssured Test">
         <classes>
             <class name="restassured.tests.GetRequestDemo" />
         </classes>

@@ -17,9 +17,11 @@ import java.util.concurrent.TimeUnit;
 public class AppiumDriverFactory {
 
 	private final static Logger logger = Logger.getLogger(AppiumDriverFactory.class);
-	private static AppiumServer anAppSvr = new AppiumServer();
+	
+	private static AppiumServer appiumServer = new AppiumServer();
 
-	public static AppiumDriver createDriver(ITestContext context) throws MalformedURLException {
+	@SuppressWarnings("rawtypes")
+	public AppiumDriver createDriver(ITestContext context) throws MalformedURLException {
 		
 		AppiumDriver driver = null;
 		DesiredCapabilities clientDc = new DesiredCapabilities();
@@ -38,13 +40,14 @@ public class AppiumDriverFactory {
 
 		int port = Integer.parseInt(context.getCurrentXmlTest().getParameter("appium.port"));
 		String serverIP = context.getCurrentXmlTest().getParameter("appium.ServerIP");
-		logger.info("ServerIP: [" + serverIP + "]");
+		
+		logger.info("Server IP: [" + serverIP + "]");
 
 		Map<String, Object> serverCaps = new HashMap<>();
 		serverCaps.put("port", port);
 		serverCaps.put("ServerIP", serverIP);
 		serverCaps.put("serverCapabilities", serverDc);
-		if (!anAppSvr.createAppiumServer(serverCaps)) {
+		if (!appiumServer.createAppiumServer(serverCaps)) {
 			throw new IllegalArgumentException("- Appium server not running");
 		}
 		try {
@@ -53,15 +56,15 @@ public class AppiumDriverFactory {
 			e.printStackTrace();
 		}
 
-		URL anURL = new URL("http://" + serverIP + ":" + port + "/wd/hub/");
+		URL url = new URL("http://" + serverIP + ":" + port + "/wd/hub/");
 
-		String aPlatform = context.getCurrentXmlTest().getParameter("clientCapabilities.platformName");
-		logger.debug("aPlatform: " + aPlatform);
+		String platform = context.getCurrentXmlTest().getParameter("clientCapabilities.platformName");
+		logger.debug("aPlatform: " + platform);
 
-		if (aPlatform.equalsIgnoreCase("android")) {
-			driver = new AndroidDriver(anURL, clientDc);
-		} else if (aPlatform.equalsIgnoreCase("ios")) {
-			driver = new IOSDriver(anURL, clientDc);
+		if (platform.equalsIgnoreCase("android")) {
+			driver = new AndroidDriver(url, clientDc);
+		} else if (platform.equalsIgnoreCase("ios")) {
+			driver = new IOSDriver(url, clientDc);
 		} else {
 			logger.error("- Platform not found");
 			throw new IllegalArgumentException();
@@ -77,6 +80,6 @@ public class AppiumDriverFactory {
 	}
 
 	public void closeServer() {
-		anAppSvr.closeAppiumServer();
+		appiumServer.closeAppiumServer();
 	}
 }
