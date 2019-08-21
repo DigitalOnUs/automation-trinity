@@ -4,7 +4,7 @@
 
     <test name="Selenium Test">
         <classes>
-            <class name="selenium.test.*" />
+            <class name="selenium.tests.SampleSeleniumTest" />
         </classes>
     </test>
 </suite>

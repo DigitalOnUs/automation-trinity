@@ -8,7 +8,7 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 
 @SuppressWarnings("rawtypes")
-public class MyAndroidApplicationPage extends BasePage {
+public class MyAndroidApplicationPage extends BaseMobilePage {
 
 	@AndroidFindBy(id = "com.vitacost.myapplication:id/top-left-button")
 	@iOSXCUITFindBy(accessibility = "top-left-button")

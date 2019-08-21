@@ -9,9 +9,9 @@ import org.testng.annotations.BeforeClass;
 
 import java.net.MalformedURLException;
 
-public class BaseTest {
+public class BaseMobileTest {
 	
-	public final static Logger logger = Logger.getLogger(BaseTest.class);
+	public final static Logger logger = Logger.getLogger(BaseMobileTest.class);
 	
 	private AppiumDriverFactory driverFactory = new AppiumDriverFactory();
 

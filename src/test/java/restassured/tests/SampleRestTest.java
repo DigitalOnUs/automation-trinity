@@ -3,16 +3,12 @@ package restassured.tests;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
-import restassured.common.BaseTest;
+import restassured.common.BaseApiTest;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-//
-//   using https://jsonplaceholder.typicode.com
-//
-
-public class GetRequestDemo extends BaseTest {
+public class SampleRestTest extends BaseApiTest {
 
 	@Test
 	public void statusVerificationOnTodos() {

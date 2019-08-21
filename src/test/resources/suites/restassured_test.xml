@@ -4,7 +4,7 @@
 
     <test name="RestAssured Test">
         <classes>
-            <class name="restassured.tests.GetRequestDemo" />
+            <class name="restassured.tests.SampleRestTest" />
         </classes>
     </test>
 </suite>

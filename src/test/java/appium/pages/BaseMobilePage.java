@@ -3,14 +3,14 @@ package appium.pages;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.apache.log4j.Logger;
-import appium.common.BaseTest;
+import appium.common.BaseMobileTest;
 
-public class BasePage {
+public class BaseMobilePage {
 	
 	@SuppressWarnings("rawtypes")
 	protected AppiumDriver driver;
 	
-	public final static Logger logger = Logger.getLogger(BaseTest.class);
+	public final static Logger logger = Logger.getLogger(BaseMobileTest.class);
 
 	public boolean waitForElementToBeVisible(MobileElement anElement, long timeInMiliSecs) {
 		while (timeInMiliSecs > 0) {

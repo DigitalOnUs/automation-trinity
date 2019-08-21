@@ -2,10 +2,10 @@ package appium.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import appium.common.BaseTest;
+import appium.common.BaseMobileTest;
 import appium.pages.MyAndroidApplicationPage;
 
-public class SampleAndroidTest extends BaseTest {
+public class SampleAndroidTest extends BaseMobileTest {
 
 	@Test
 	public void test() {
