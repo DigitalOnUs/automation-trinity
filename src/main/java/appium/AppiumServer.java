@@ -1,5 +1,4 @@
-package main.java.appium;
-
+package appium;
 
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
@@ -13,92 +12,91 @@ import java.net.ServerSocket;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-
 public class AppiumServer {
 
-        private AppiumDriverLocalService service;
+	private AppiumDriverLocalService service;
 
-        public boolean createAppiumServer( Map<String,Object> aMap ) {
-            int port               = (int)    aMap.get( "port" );
-            String ServerIP        = (String) aMap.get( "ServerIP" );
-            DesiredCapabilities dc = (DesiredCapabilities) aMap.get( "serverCapabilities" );
+	public boolean createAppiumServer(Map<String, Object> props) {
 
-//        if( !checkIfServerIsRunnning( port ) ) {
-            stopServer();
-            return startServer( port , ServerIP , dc );
-//        } else {
-//            System.out.println("Appium Server already running on Port - " + port );
-//            return true;
-//        }
-        }
+		int port = (int) props.get("port");
+		String serverIP = (String) props.get("serverIP");
+		DesiredCapabilities dc = (DesiredCapabilities) props.get("serverCapabilities");
 
-        public void closeAppiumServer() {
-            stopServer();
-        }
+		// if (!checkIfServerIsRunnning(port)) {
+		stopServer();
+		return startServer(port, serverIP, dc);
+		// } else {
+		// System.out.println("Appium Server already running on Port - " + port );
+		// return true;
+		// }
+	}
 
-        // ------ PRIVATE------
-        private boolean checkIfServerIsRunnning( int port ) {
-            boolean isServerRunning = false;
-            ServerSocket serverSocket;
-            try {
-                serverSocket = new ServerSocket(port);
-                serverSocket.close();
-            } catch (IOException e) {
-                //If control comes here, then it means that the port is in use
-                isServerRunning = true;
-            } finally {
-                serverSocket = null;
-            }
-            return isServerRunning;
-        }
+	public void closeAppiumServer() {
+		stopServer();
+	}
 
-        private boolean startServer( int port , String anURL , DesiredCapabilities dc ) {
-            try {
-                AppiumServiceBuilder builder;
+//	private boolean checkIfServerIsRunnning(int port) {
+//		boolean isServerRunning = false;
+//		ServerSocket serverSocket;
+//		try {
+//			serverSocket = new ServerSocket(port);
+//			serverSocket.close();
+//		} catch (IOException e) {
+//			// If control comes here, then it means that the port is in use
+//			isServerRunning = true;
+//		} finally {
+//			serverSocket = null;
+//		}
+//		return isServerRunning;
+//	}
 
-                //Build the Appium service
-                builder = new AppiumServiceBuilder();
-                builder.withIPAddress( "127.0.0.1" );
-                builder.usingPort( port );
-                builder.withCapabilities( dc );
-                builder.withArgument(AndroidServerFlag.BOOTSTRAP_PORT_NUMBER, nextFreePort().toString() );
-                builder.withArgument( AndroidServerFlag.CHROME_DRIVER_PORT, nextFreePort().toString() );
+	private boolean startServer(int port, String serverIp, DesiredCapabilities dc) {
+		try {
+			AppiumServiceBuilder builder;
 
-                //Start the server with the builder
-                service = AppiumDriverLocalService.buildService( builder );
-                service.start();
+			// Build the Appium service
+			builder = new AppiumServiceBuilder();
+			builder.withIPAddress(serverIp);
+			builder.usingPort(port);
+			builder.withCapabilities(dc);
+			builder.withArgument(AndroidServerFlag.BOOTSTRAP_PORT_NUMBER, nextFreePort().toString());
+			builder.withArgument(AndroidServerFlag.CHROME_DRIVER_PORT, nextFreePort().toString());
 
-                int cnt = 0;
-                while( !service.isRunning() && cnt++ < 10)
-                {
-                    try {
-                        Thread.sleep( 1000 );
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                return service.isRunning();
+			// Start the server with the builder
+			service = AppiumDriverLocalService.buildService(builder);
+			service.start();
 
-            } catch (AppiumServerHasNotBeenStartedLocallyException e) {
-                e.printStackTrace();
-            }
-            return false;
-        }
+			int cnt = 0;
+			while (!service.isRunning() && cnt++ < 10) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			return service.isRunning();
 
-        private void stopServer() {
-            if( service != null )
-                service.stop();
-        }
+		} catch (AppiumServerHasNotBeenStartedLocallyException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
-        private synchronized Integer nextFreePort() {
-            Integer port = (int) (Math.random() * 8000) + 8100;
-            while (true) {
-                try (ServerSocket endpoint = new ServerSocket(port)) {
-                    System.out.println( "Sock listening on Port :" + port );
-                    return port;
-                } catch (IOException e) {
-                    port = ThreadLocalRandom.current().nextInt();
-                }
-            }
-        }
+	private void stopServer() {
+		if (service != null) {
+			service.stop();
+		}
+	}
+
+	private synchronized Integer nextFreePort() {
+		Integer port = (int) (Math.random() * 8000) + 8100;
+		while (true) {
+			try (ServerSocket endpoint = new ServerSocket(port)) {
+				System.out.println("Socket listening on port: " + port);
+				return port;
+			} catch (IOException e) {
+				port = ThreadLocalRandom.current().nextInt();
+			}
+		}
+	}
 }

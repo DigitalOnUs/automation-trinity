@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Web UI Test Suite" verbose="1">
+
+    <test name="Selenium Test">
+        <classes>
+            <class name="selenium.tests.SampleSeleniumTest" />
+        </classes>
+    </test>
+</suite>

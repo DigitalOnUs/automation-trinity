@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Appium_AndroidTest" verbose="1">
+<suite name="Mobile Test Suite" verbose="1">
 
     <!--Appium Server capabilities-->
     <parameter name="serverCapabilities.relaxedSecurityEnabled" value="true"/>
@@ -15,18 +15,19 @@
     <parameter name="tests.implicitlyWait"                      value="60"/>
 
     <!--Local client capabilities-->
-    <test name="Android">
+    <test name="Appium Android Test">
         <parameter name="clientCapabilities.platformName"       value="Android"/>
-        <parameter name="clientCapabilities.deviceName"         value="Nexus_5X_API_22"/>
+        <parameter name="clientCapabilities.deviceName"         value="Pixel_2_API_28"/>
         <parameter name="clientCapabilities.automationName"     value="uiautomator2"/>
-        <parameter name="clientCapabilities.app"                value="src/apps/app-debug.apk"/>
+        <parameter name="clientCapabilities.app"                value="src/test/resources/apps/app-debug.apk"/>
         <parameter name="clientCapabilities.appActivity"        value="MainActivity"/>
         <parameter name="clientCapabilities.appPackage"         value="com.vitacost.myapplication"/>
         <parameter name="clientCapabilities.noSign"             value="true"/>
         <parameter name="appium.ServerIP"                       value="127.0.0.1"/>
         <parameter name="appium.port"                           value="4723"/>
+        
         <classes>
-            <class name="test.java.appium.tests.SampleCITests" />
+            <class name="appium.tests.SampleAndroidTest" />
         </classes>
     </test>
 
