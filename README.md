@@ -13,21 +13,21 @@ NOTE: A separate document guide will be created in this same repository for Appi
 
 ### To execute this project:
 
-##### API
+#### API
 > mvn clean test -Dxml.suite=restassured_test.xml
 
 This project is quite straightforward, and validates some responses from `https://jsonplaceholder.typicode.com`
 
 **NOTE:** Internet connection is required to execute this project.
 
-##### Web UI (Chrome)
+#### Web UI (Chrome)
 > mvn clean test -Dxml.suite=selenium_test.xml
 
 It should exist a system property `webdriver.chrome.driver` pointing to an executable driver for Chrome (chromedriver).
 
 **NOTE:** Internet connection is required to execute this project.
 
-##### Mobile (Android)
+#### Mobile (Android)
 > mvn clean test -Dxml.suite=appium_test.xml
 
 Within appium_test.xml, one can find all desired capabilities to setup the device.
